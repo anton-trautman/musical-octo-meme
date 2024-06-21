@@ -114,8 +114,6 @@ const GuitarAutotuner = () => {
 
   return (
     <TunerContainer>
-      <h1>Simple tuner</h1>
-
       <TunerDisplay>
         <TunerScale>
           {[-50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50].map((mark) => (
