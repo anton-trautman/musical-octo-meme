@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { telegramUserSchema } from "../../constant/styles";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -11,7 +12,6 @@ export const Wrapper = styled.div`
 
 export const NoteWrapper = styled.div`
   min-height: 108px;
-
   background: transparent;
   display: flex;
   justify-content: center;
@@ -52,7 +52,7 @@ export const TunerDisplay = styled.div`
   width: 300px;
   height: 150px;
   margin: 20px auto;
-  background-color: #f0f0f0;
+  background-color: ${telegramUserSchema.sectionBgColor};
   border-radius: 150px 150px 0 0;
   position: relative;
   overflow: hidden;
@@ -87,13 +87,13 @@ export const ScaleMarkTitle = styled.span`
 
 export const TunerNeedle = styled.div<{ rotation: number; color: string }>`
   position: absolute;
-  bottom: 0;
+  bottom: 13px;
   left: 50%;
   width: 2px;
   height: 130px;
   background-color: ${(p) => p.color};
   transform-origin: bottom center;
-  transform: ${(props) => `rotate(${props.rotation}deg)`};
+  transform: ${(props) => `translateX(-50%) rotate(${props.rotation}deg)`};
   transition: all 0.1s ease-out;
 `;
 //
