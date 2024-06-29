@@ -156,3 +156,21 @@ export const generateNotesFrequencies = () => {
 
   return frequencies;
 };
+
+const colors = {
+  success: "#03BF8F",
+  error: "#ff244b",
+};
+
+export const getNeedleRotation = (cents: number) => {
+  // Limit the rotation to -45 to 45 degrees
+
+  if (!cents) {
+    return 0;
+  }
+
+  return Math.max(-45, Math.min(45, cents));
+};
+
+export const getColor = (cents: number) =>
+  !cents || Math.abs(cents) < 5 ? colors.success : colors.error;

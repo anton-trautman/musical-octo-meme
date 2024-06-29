@@ -4,8 +4,11 @@ import {
   centsOffPitch,
   findClosestNote,
   generateNotesFrequencies,
+  getColor,
+  getNeedleRotation,
 } from "../utils";
 import {
+  NoteTitle,
   ScaleMark,
   ScaleMarkTitle,
   TunerContainer,
@@ -48,17 +51,12 @@ const GuitarAutotuner = () => {
           notesFrequenciesRef.current
         );
         setClosestNote(note);
-        // setClosestFreq(freq);
-        setCents(centsOffPitch(detectedPitch, freq));
+        const _cents = centsOffPitch(detectedPitch, freq);
+        setCents(_cents);
       }
     }
     animationFrameRef.current = requestAnimationFrame(update);
   }, [dataArrayRef?.current]);
-
-  const getNeedleRotation = () => {
-    // Limit the rotation to -45 to 45 degrees
-    return Math.max(-45, Math.min(45, cents));
-  };
 
   const toggleTuner = () => {
     if (isActive) {
@@ -108,7 +106,6 @@ const GuitarAutotuner = () => {
     setIsActive(false);
     setPitch(null);
     setClosestNote("");
-    // setClosestFreq(0);
     setCents(0);
   };
 
@@ -122,21 +119,16 @@ const GuitarAutotuner = () => {
             </ScaleMark>
           ))}
         </TunerScale>
+
         <TunerNeedle
-          rotation={getNeedleRotation()}
-          color={Math.abs(cents) < 5 ? "green" : "red"}
+          rotation={getNeedleRotation(cents)}
+          color={getColor(cents)}
         />
+
+        <NoteTitle color={getColor(cents)}>{closestNote}</NoteTitle>
       </TunerDisplay>
       <div>Current pitch: {pitch ? pitch.toFixed(2) : "N/A"} Hz</div>
-      <div
-        style={{
-          fontSize: "36px",
-        }}
-      >
-        Closest note: {closestNote}
-      </div>
       <div>Cents: {isNaN(cents) ? 0 : cents}</div>
-
       <ToggleButton active={isActive} onClick={toggleTuner} />
     </TunerContainer>
   );

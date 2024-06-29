@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { telegramUserSchema } from "../constant/styles";
 
 const theme = {
-  bgColor: telegramUserSchema.bgColor || "#333",
+  bgColor: "var(--tg-theme-bg-color)" || "#333",
   textColor: telegramUserSchema.textColor || "#f2f2f2",
 };
 

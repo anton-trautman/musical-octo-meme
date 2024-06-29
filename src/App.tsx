@@ -1,8 +1,8 @@
+import "@twa-dev/sdk";
 import "./App.css";
 import { AppContainer, FlexBoxCol, StyledApp } from "./styled/styled";
 import { Tuner } from "./feature/tuner";
 
-import "@twa-dev/sdk";
 import StyledThemeProvider from "./provider/theme";
 
 function App() {

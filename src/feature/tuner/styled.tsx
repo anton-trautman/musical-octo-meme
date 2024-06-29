@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { telegramUserSchema } from "../../constant/styles";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -42,7 +41,6 @@ export const ButtonTuner = styled.button`
 `;
 
 export const TunerContainer = styled.div`
-  font-family: Arial, sans-serif;
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
@@ -52,10 +50,11 @@ export const TunerDisplay = styled.div`
   width: 300px;
   height: 150px;
   margin: 20px auto;
-  background-color: ${telegramUserSchema.sectionBgColor};
   border-radius: 150px 150px 0 0;
   position: relative;
   overflow: hidden;
+
+  background: linear-gradient(90deg, #e1dada, #bdcad9) !important;
 `;
 
 export const TunerScale = styled.div`
@@ -87,31 +86,24 @@ export const ScaleMarkTitle = styled.span`
 
 export const TunerNeedle = styled.div<{ rotation: number; color: string }>`
   position: absolute;
-  bottom: 13px;
+  bottom: 10px;
   left: 50%;
   width: 2px;
   height: 130px;
   background-color: ${(p) => p.color};
   transform-origin: bottom center;
-  transform: ${(props) => `translateX(-50%) rotate(${props.rotation}deg)`};
-  transition: all 0.1s ease-out;
+  transform: translateX(-50%);
+  rotate: ${(p) => `${p.rotation}deg`};
+  transition: transform 0.3s ease-out, color 0.1s linear;
+  will-change: transform;
 `;
-//
-// export const ToggleButton = styled.button<{ active: boolean }>`
-//   background-color: ${(props) => (props.active ? "#ff6347" : "#4CAF50")};
-//   border: none;
-//   color: "var(--tg-theme-button-color)";
-//   padding: 15px 32px;
-//   text-align: center;
-//   text-decoration: none;
-//   display: inline-block;
-//   font-size: 16px;
-//   margin: 4px 2px;
-//   cursor: pointer;
-//   border-radius: 4px;
-//   transition: background-color 0.3s ease;
-//
-//   &:hover {
-//     background-color: ${(props) => (props.active ? "#ff4500" : "#45a049")};
-//   }
-// `;
+
+export const NoteTitle = styled.div<{ color: string }>`
+  position: absolute;
+  left: 50%;
+  bottom: -10;
+  z-index: 10;
+  font-size: 42px;
+  transform: translateX(-50%);
+  color: ${(p) => p.color};
+`;
