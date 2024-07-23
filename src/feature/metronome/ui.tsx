@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ComponentContainer } from "@/shared/styled";
-import { ToggleButton } from "@/shared/ui/toggle-button";
+import { ComponentContainer } from "../../shared/styled";
+import { ToggleButton } from "../../shared/ui/toggle-button";
 import {
   Beat,
   VisualMetronome,

@@ -6,7 +6,7 @@ import {
   generateNotesFrequencies,
   getColor,
   getNeedleRotation,
-} from "../utils";
+} from "./utils";
 import {
   NoteTitle,
   ScaleMark,
@@ -14,10 +14,10 @@ import {
   TunerDisplay,
   TunerNeedle,
   TunerScale,
-} from "../styled";
+} from "./styled";
 
-import { ToggleButton } from "@/shared/ui/toggle-button";
-import { ComponentContainer } from "@/shared/styled";
+import { ToggleButton } from "../../shared/ui/toggle-button";
+import { ComponentContainer } from "../../shared/styled";
 
 const GuitarAutotuner = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
