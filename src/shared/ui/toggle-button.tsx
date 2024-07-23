@@ -1,8 +1,24 @@
-// import styled from "styled-components";
+import styled from "styled-components";
 // import { useSpring, animated } from "@react-spring/web";
 // import { interpolate } from "flubber";
-
-import { ButtonTuner } from "../styled";
+const ButtonTuner = styled.button`
+  background-color: ${(props) =>
+    props.disabled ? "#6e6e6e" : "var(--tg-theme-button-color)"};
+  border: 0;
+  border-radius: 50%;
+  padding: 40px;
+  margin-top: 40px;
+  color: var(--tg-theme-button-text-color);
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.1s linear, transform 0.2s ease;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    transform: scale(1.1);
+  }
+`;
 
 const stopPath =
   "M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z";

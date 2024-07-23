@@ -1,1 +1,1 @@
-export { default as Tuner } from "./ui/autotuner";
+export { default } from "./ui/autotuner";

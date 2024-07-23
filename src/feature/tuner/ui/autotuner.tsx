@@ -11,13 +11,13 @@ import {
   NoteTitle,
   ScaleMark,
   ScaleMarkTitle,
-  TunerContainer,
   TunerDisplay,
   TunerNeedle,
   TunerScale,
 } from "../styled";
 
-import { ToggleButton } from "./toggle-button";
+import { ToggleButton } from "@/shared/ui/toggle-button";
+import { ComponentContainer } from "@/shared/styled";
 
 const GuitarAutotuner = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -37,6 +37,8 @@ const GuitarAutotuner = () => {
   );
   const animationFrameRef = useRef<number | null>(null);
 
+  // const bufferArrayRef = useRef();
+
   const update = useCallback(() => {
     if (analyserRef.current && dataArrayRef.current) {
       analyserRef.current.getFloatTimeDomainData(dataArrayRef.current);
@@ -44,16 +46,20 @@ const GuitarAutotuner = () => {
         dataArrayRef.current,
         audioContextRef.current!.sampleRate
       );
-      if (detectedPitch !== null) {
-        setPitch(detectedPitch);
-        const { closestNote: note, closestFreq: freq } = findClosestNote(
-          detectedPitch,
-          notesFrequenciesRef.current
-        );
-        setClosestNote(note);
-        const _cents = centsOffPitch(detectedPitch, freq);
-        setCents(_cents);
+
+      if (detectedPitch == null) {
+        return;
       }
+
+      const { closestNote: note, closestFreq: freq } = findClosestNote(
+        detectedPitch,
+        notesFrequenciesRef.current
+      );
+      const _cents = centsOffPitch(detectedPitch, freq);
+
+      setPitch(detectedPitch);
+      setClosestNote(note);
+      setCents(_cents);
     }
     animationFrameRef.current = requestAnimationFrame(update);
   }, [dataArrayRef?.current]);
@@ -110,7 +116,7 @@ const GuitarAutotuner = () => {
   };
 
   return (
-    <TunerContainer>
+    <ComponentContainer>
       <TunerDisplay>
         <TunerScale>
           {[-50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50].map((mark) => (
@@ -130,8 +136,42 @@ const GuitarAutotuner = () => {
       <div>Current pitch: {pitch ? pitch.toFixed(2) : "N/A"} Hz</div>
       <div>Cents: {isNaN(cents) ? 0 : cents}</div>
       <ToggleButton active={isActive} onClick={toggleTuner} />
-    </TunerContainer>
+    </ComponentContainer>
   );
 };
 
 export default GuitarAutotuner;
+//
+// const LOCAL_BUFFER_MAX_LENGHT = 10;
+//
+// const normalizePitch = () => {
+//   let localBuffer: number[] = [];
+//   let result = 0;
+//
+//   const update = (pitch: number) => {
+//     const minPitch = 1;
+//
+//     if (!localBuffer.length && pitch < minPitch) {
+//       return 0;
+//     }
+//
+//     localBuffer.push(pitch);
+//
+//     if (localBuffer.length >= LOCAL_BUFFER_MAX_LENGHT) {
+//       localBuffer.shift();
+//     }
+//
+//     const sum = localBuffer.reduce((acc, item) => item + acc, 0);
+//
+//     console.log({ sum });
+//     console.log({ localBuffer });
+//
+//     result = Math.max(sum, 1) / (localBuffer.length || 1);
+//     return;
+//   };
+//
+//   return {
+//     update,
+//     value: result,
+//   };
+// };

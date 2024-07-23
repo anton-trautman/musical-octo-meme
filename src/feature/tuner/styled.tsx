@@ -24,22 +24,6 @@ export const Text = styled.p`
   color: white;
 `;
 
-export const ButtonTuner = styled.button`
-  background-color: ${(props) =>
-    props.disabled ? "#6e6e6e" : "var(--tg-theme-button-color)"};
-  border: 0;
-  border-radius: 50%;
-  padding: 40px;
-  margin-top: 40px;
-  color: var(--tg-theme-button-text-color);
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.1s linear;
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
 export const TunerContainer = styled.div`
   max-width: 400px;
   margin: 0 auto;
